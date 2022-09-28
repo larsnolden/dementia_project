@@ -1,0 +1,32 @@
+{
+  "wake up": {
+    "id": 1,
+    "name": "wake up",
+    "timeWindowFrom": [7, 30],
+    "timeWindowTo": [8, 30],
+    "isSkippable": 0,
+    "ledId": 1,
+    "voiceFiles": ["some.mp4", "anothe.mp4"],
+    "isCompleted": 0
+  },
+  "medication": {
+    "id": 2,
+    "name": "medication morning",
+    "timeWindowFrom": [7, 30],
+    "timeWindowTo": [8, 30],
+    "isSkippable": 0,
+    "ledId": 2,
+    "voiceFiles": ["some.mp4", "anothe.mp4"],
+    "isCompleted": 0
+  },
+  "brush teeth": {
+    "id": 3,
+    "name": "Brush Teeth",
+    "timeWindowFrom": [8, 00],
+    "timeWindowTo": [9, 30],
+    "isSkippable": 1,
+    "ledId": 3,
+    "voiceFiles": ["some.mp4", "anothe.mp4"],
+    "isCompleted": 0
+  }
+}

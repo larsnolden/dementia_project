@@ -14,7 +14,7 @@
     },
     "isInTimeWindow": false,
     "isComplete": false,
-    "voiceReminders": ["sound_files/Wake up.mp4"],
+    "voiceReminders": ["sound_files/Wake up.mp3"],
     "ledId": 11,
     "isLightTurned": false
   }

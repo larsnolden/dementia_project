@@ -16,6 +16,7 @@ listJson = json.load(file)
 
 
 def cls():
+    return
     os.system('cls' if os.name=='nt' else 'clear')
 
 def playSound(mp3file):
@@ -63,7 +64,7 @@ def assistant():
 data_size = 100  # sending 16 bytes = 128 bits (binary touch states, for example)
 
 # server settings
-HOST = '10.53.85.94'
+HOST = '172.20.10.4'
 PORT = 8776
 EXPORT_FOLDER_PATH='./training_data'
 server_address = (HOST, PORT)

@@ -45,77 +45,80 @@ current_recording_activity = None
 needs_to_save = False
 classified = False
 
-while True:
-    data = connection.recv(data_size)
-    received_string = data.decode("utf-8")
-    if received_string != "":
-        # print('Received', received_string)
-        # print(window,'\n',  properties, '\n', received_string)
-        properties = received_string.split(",")
+def activity_tracking(current_activity_i, activities):
+    while True:
+        data = connection.recv(data_size)
+        received_string = data.decode("utf-8")
+        if received_string != "":
+            # print('Received', received_string)
+            # print(window,'\n',  properties, '\n', received_string)
+            properties = received_string.split(",")
 
-        #print(properties)
+            #print(properties)
 
-        # last item in the sent data identifies the activity bein recorded
-        # if that activity is Null then we should classify the incoming data
-        if(len(properties) != 9):
-            continue
-        if(properties[-1] == 'Null'):
-            # classify activity / start analysis
-            if(needs_to_save):
-                # save dataframe from previous recording when analysys starts again
-                # analysis indicates end of recording
-                date_and_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                export_df.to_csv('%s/%s_%s.csv'%(EXPORT_FOLDER_PATH, current_recording_activity, date_and_time))
-                print(export_df.head(5))
-                export_df = pd.DataFrame(columns=['time', 'seconds_elapsed', 'Ax', 'Ay', 'Az', 'Gx' ,'Gy', 'Gz', 'Activity'])
-                needs_to_save = False
-                window = []
-                cls()
-            try:
-                parsed = list(map(lambda x: float(x), properties[2:8]))
-                window.append(parsed) #skip over magnetometer data 
-            except:
-                print('bad data overlap')
+            # last item in the sent data identifies the activity bein recorded
+            # if that activity is Null then we should classify the incoming data
+            if(len(properties) != 9):
+                continue
+            if(properties[-1] == 'Null'):
+                # classify activity / start analysis
+                if(needs_to_save):
+                    # save dataframe from previous recording when analysys starts again
+                    # analysis indicates end of recording
+                    date_and_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    export_df.to_csv('%s/%s_%s.csv'%(EXPORT_FOLDER_PATH, current_recording_activity, date_and_time))
+                    print(export_df.head(5))
+                    export_df = pd.DataFrame(columns=['time', 'seconds_elapsed', 'Ax', 'Ay', 'Az', 'Gx' ,'Gy', 'Gz', 'Activity'])
+                    needs_to_save = False
+                    window = []
+                    cls()
+                try:
+                    parsed = list(map(lambda x: float(x), properties[2:8]))
+                    window.append(parsed) #skip over magnetometer data 
+                except:
+                    print('bad data overlap')
 
-            if(len(window) == 30):
-                predictions = model.predict(window[0:30])
-                count = Counter(predictions)
-                cls()
-                count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
-                for key in count.keys():
-                    print('%s:%d%%'%(key, int(round(count.get(key)/30*100, 0))))
+                if(len(window) == 30):
+                    predictions = model.predict(window[0:30])
+                    count = Counter(predictions)
+                    cls()
+                    count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
+                    current_activity_i = activities.index(count.most_commmon(1)[0][0])
+                    for key in count.keys():
+                        print('%s:%d%%'%(key, int(round(count.get(key)/30*100, 0))))
 
-            if len(window) == 40:
-                predictions = model.predict(window[10:40])
-                count = Counter(predictions)
-                count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
-                cls()
-                for key in count.keys():
-                    print('%s:%d%%'%(key, int(round(count.get(key)/30*100, 0))))
-                window = []
-            classified = True
-        else:
-            # record activity
-            if(classified):
-                window = []
-                classified = False
-                needs_to_save = True
-            print('record')
-            print(len(window))
-            try:
-                parsed = list(map(lambda x: float(x), properties[0:8])) # do not pase the activity, bcs it's a string
-                current_recording_activity = properties[-1]
-                window.append(parsed[0:8] + [properties[-1]]) #skip over magnetometer data 
-            except:
-                print('bad data overlap')
-            if(len(window) == 25):
-                print('add to df')
-                # save all 100 measurements
-                for measurement in window:
-                    new_row = pd.Series({'time': measurement[0], 'seconds_elapsed': measurement[1], 'Ax': measurement[2], 'Ay': measurement[3], 'Az': measurement[4], 'Gx': measurement[5], 'Gy': measurement[6], 'Gz': measurement[7], 'Activity': measurement[-1] })
-                    print(new_row.head(4))
-                    export_df = pd.concat([export_df, new_row.to_frame().T], ignore_index=True)
-                window = []
+                if len(window) == 40:
+                    predictions = model.predict(window[10:40])
+                    count = Counter(predictions)
+                    count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
+                    cls()
+                    for key in count.keys():
+                        print('%s:%d%%'%(key, int(round(count.get(key)/30*100, 0))))
+                    current_activity_i = activities.index(count.most_commmon(1)[0][0])
+                    window = []
+                classified = True
+            else:
+                # record activity
+                if(classified):
+                    window = []
+                    classified = False
+                    needs_to_save = True
+                print('record')
+                print(len(window))
+                try:
+                    parsed = list(map(lambda x: float(x), properties[0:8])) # do not pase the activity, bcs it's a string
+                    current_recording_activity = properties[-1]
+                    window.append(parsed[0:8] + [properties[-1]]) #skip over magnetometer data 
+                except:
+                    print('bad data overlap')
+                if(len(window) == 25):
+                    print('add to df')
+                    # save all 100 measurements
+                    for measurement in window:
+                        new_row = pd.Series({'time': measurement[0], 'seconds_elapsed': measurement[1], 'Ax': measurement[2], 'Ay': measurement[3], 'Az': measurement[4], 'Gx': measurement[5], 'Gy': measurement[6], 'Gz': measurement[7], 'Activity': measurement[-1] })
+                        print(new_row.head(4))
+                        export_df = pd.concat([export_df, new_row.to_frame().T], ignore_index=True)
+                    window = []
 
                 
 

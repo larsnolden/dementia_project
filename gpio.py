@@ -2,11 +2,23 @@ import RPi.GPIO as GPIO
 import time
 
 # brush teeth
-LED_PIN = 17
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
 
 def set_light(id, setOn):
-    gpio_state = GPIO.LOW if setOn == True else GPIO.LOW
+    # brush teeth
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(id, GPIO.OUT)
+
+    gpio_state = GPIO.HIGH if setOn == True else GPIO.LOW
     GPIO.output(id, gpio_state)
-    GPIO.cleanup()
+
+
+
+def test():
+    id = 11
+    while True:
+        set_light(id, True)
+        time.sleep(2)
+        set_light(id, False)
+        time.sleep(2)
+
+

@@ -1,0 +1,146 @@
+[
+  {
+    "activityName": "Wake Up",
+    "timeWindow": {
+      "beginning": {
+        "hour": 7,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 8,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 1,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Take Medication",
+    "timeWindow": {
+      "beginning": {
+        "hour": 7,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 8,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 2,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Brush Teeth",
+    "timeWindow": {
+      "beginning": {
+        "hour": 8,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 9,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 3,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Breakfast",
+    "timeWindow": {
+      "beginning": {
+        "hour": 8,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 9,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 4,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Walk",
+    "timeWindow": {
+      "beginning": {
+        "hour": 11,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 12,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 1,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Lunch",
+    "timeWindow": {
+      "beginning": {
+        "hour": 12,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 13,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 1,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Dinner",
+    "timeWindow": {
+      "beginning": {
+        "hour": 17,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 18,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 1,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Take Medication",
+    "timeWindow": {
+      "beginning": {
+        "hour": 18,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 8,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["file1.mp4", "file2.mp4"],
+    "ledId": 2,
+    "isLightTurned": false
+  }
+]

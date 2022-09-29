@@ -1,0 +1,21 @@
+[
+  {
+    "activityName": "Wake Up",
+    "condition": "Standing",
+    "timeWindow": {
+      "beginning": {
+        "hour": 7,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 18,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Wake up.mp4"],
+    "ledId": 11,
+    "isLightTurned": false
+  }
+]

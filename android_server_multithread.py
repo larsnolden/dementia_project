@@ -9,8 +9,9 @@ import datetime
 import time
 from threading import Thread
 import pygame
+import gpio
 
-file = open("eventsKris.JSON")
+file = open("eventsTEST.JSON")
 listJson = json.load(file)
 
 
@@ -23,6 +24,9 @@ def playSound(mp3file):
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy() == True:
         continue
+
+def toggleLight(id, on):
+    gpio.set_light(id, on)
 
 def assistant():
     while True:
@@ -44,14 +48,14 @@ def assistant():
                 if not event["isLightTurned"]:
                     event["isLightTurned"] = True
                     print("Light ON for", event["activityName"])
-                    #TODO Light ON for event
+                    toggleLight(event["ledId"], True)
                 #Remind
                 playSound(event["voiceReminders"][0])
             elif event["isLightTurned"] and event["isInTimeWindow"] and not event["isComplete"]:
                 event["isInTimeWindow"] = False
                 event["isLightTurned"] = False
                 print("Light OFF for", event["activityName"])
-                #TODO turn off light for event because it was not done and it is outside of the time frame
+                toggleLight(event["ledId"], False)
             else:
                 event["isInTimeWindow"] = False
 
@@ -142,7 +146,7 @@ while True:
                         event["isLightTurned"] = False
                         print(event["condition"], " is Done")
                         print("LIGHT OFF for", event["activityName"])
-                        #TODO TURN OFF THE CORRESPONDING LIGHT
+                        toggleLight(event["ledId"], False)
 
             if len(window) == 40:
                 predictions = model.predict(window[10:40])
@@ -159,7 +163,7 @@ while True:
                         event["isLightTurned"]
                         print(event["condition"], " is Done")
                         print("LIGHT OFF for", event["activityName"])
-                        # TODO TURN OFF THE CORRESPONDING LIGHT
+                        toggleLight(event["ledId"], False)
                 window = []
             classified = True
         else:

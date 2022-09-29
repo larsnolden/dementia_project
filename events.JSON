@@ -22,7 +22,7 @@
   "brush teeth": {
     "id": 3,
     "name": "Brush Teeth",
-    "timeWindowFrom": [8, 00],
+    "timeWindowFrom": [8, 0],
     "timeWindowTo": [9, 30],
     "isSkippable": 1,
     "ledId": 3,

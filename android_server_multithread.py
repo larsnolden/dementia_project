@@ -1,4 +1,5 @@
 import socket
+from random import random
 from tokenize import Double
 import joblib
 from collections import Counter
@@ -29,14 +30,22 @@ def playSound(mp3file):
 def toggleLight(id, on):
     gpio.set_light(id, on)
 
+
+currentHour = 7
+currentMinute = 30
+
 def assistant():
+    global currentMinute, currentHour
     while True:
-        time.sleep(30)
+        time.sleep(20)
         print("Assistant Started")
 
-        now = datetime.datetime.now()
-        currentHour = now.hour
-        currentMinute = now.minute
+        currentMinute = currentMinute + 15
+
+        if (currentMinute == 60):
+            currentMinute = 0
+            currentHour = currentHour + 1
+            print("Time:", currentHour, ":", currentMinute)
 
         for event in listJson:
             currentTimeInMinutes = currentHour*60 + currentMinute
@@ -51,7 +60,7 @@ def assistant():
                     print("Light ON for", event["activityName"])
                     toggleLight(event["ledId"], True)
                 #Remind
-                playSound(event["voiceReminders"][0])
+                playSound(random.choice(event["voiceReminders"]))
             elif event["isLightTurned"] and event["isInTimeWindow"] and not event["isComplete"]:
                 event["isInTimeWindow"] = False
                 event["isLightTurned"] = False
@@ -148,6 +157,7 @@ while True:
                         print(event["condition"], " is Done")
                         print("LIGHT OFF for", event["activityName"])
                         toggleLight(event["ledId"], False)
+                        playSound(random.choice(event["voiceFinished"]))
 
             if len(window) == 40:
                 predictions = model.predict(window[10:40])
@@ -165,6 +175,7 @@ while True:
                         print(event["condition"], " is Done")
                         print("LIGHT OFF for", event["activityName"])
                         toggleLight(event["ledId"], False)
+                        playSound(random.choice(event["voiceFinished"]))
                 window = []
             classified = True
         else:

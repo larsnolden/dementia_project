@@ -8,14 +8,135 @@
         "minutes": 30
       },
       "end": {
-        "hour": 18,
+        "hour": 8,
         "minutes": 30
       }
     },
     "isInTimeWindow": false,
     "isComplete": false,
-    "voiceReminders": ["sound_files/Wake up.mp3"],
-    "ledId": 11,
+    "voiceReminders": ["sound_files/Please wake up 1.mp3"],
+    "voiceFinished": ["sound_files/Finished wake up 1.mp3"],
+    "ledId": 7,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Take Medication",
+    "condition": "Medication",
+    "timeWindow": {
+      "beginning": {
+        "hour": 8,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 9,
+        "minutes": 0
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please take medicine 1.mp3", "sound_files/Please take medicine 2.mp3"],
+    "voiceFinished": ["sound_files/Finished take medicine 1.mp3", "sound_files/Finished take medicine 2.mp3"],
+    "ledId": 29,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Brush Teeth",
+    "condition": "BrushingTeeth",
+    "timeWindow": {
+      "beginning": {
+        "hour": 9,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 9,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please brush teeth 1.mp3"],
+    "voiceFinished": ["sound_files/Finished brush teeth 1.mp3"],
+    "ledId": 31,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Breakfast",
+    "condition": "Eating",
+    "timeWindow": {
+      "beginning": {
+        "hour": 9,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 10,
+        "minutes": 0
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please eat breakfast 1.mp3", "sound_files/Please eat breakfast 2.mp3"],
+    "voiceFinished": ["sound_files/Finished breakfast 1.mp3", "sound_files/Finished breakfast 2.mp3"],
+    "ledId": 33,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Lunch",
+    "condition": "Eating",
+    "timeWindow": {
+      "beginning": {
+        "hour": 12,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 12,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please eat lunch 1.mp3", "sound_files/Please eat lunch 2.mp3"],
+    "voiceFinished": ["sound_files/Finished lunch 1.mp3", "sound_files/Finished lunch 2.mp3", "sound_files/Finished lunch 3.mp3"],
+    "ledId": 33,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Mid Day Walk",
+    "condition": "Walking",
+    "timeWindow": {
+      "beginning": {
+        "hour": 14,
+        "minutes": 0
+      },
+      "end": {
+        "hour": 14,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please move 1.mp3"],
+    "voiceFinished": ["sound_files/Finished move 1.mp3"],
+    "ledId": 35,
+    "isLightTurned": false
+  },
+  {
+    "activityName": "Dinner",
+    "condition": "Eating",
+    "timeWindow": {
+      "beginning": {
+        "hour": 18,
+        "minutes": 30
+      },
+      "end": {
+        "hour": 19,
+        "minutes": 30
+      }
+    },
+    "isInTimeWindow": false,
+    "isComplete": false,
+    "voiceReminders": ["sound_files/Please eat dinner 1.mp3", "sound_files/Please eat dinner 2.mp3"],
+    "voiceFinished": ["sound_files/Finished dinner 1.mp3"],
+    "ledId": 33,
     "isLightTurned": false
   }
 ]

@@ -37,10 +37,10 @@ currentMinute = 30
 def assistant():
     global currentMinute, currentHour
     while True:
-        inrementTime = input("Progress time with: ");
-        print("Assistant Started")
+        input();
+        print("Time Progressed")
 
-        currentMinute = currentMinute + inrementTime
+        currentMinute = currentMinute + 10
 
         if (currentMinute > 60):
             currentMinute = currentMinute - 60

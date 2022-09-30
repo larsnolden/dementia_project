@@ -37,15 +37,15 @@ currentMinute = 30
 def assistant():
     global currentMinute, currentHour
     while True:
-        time.sleep(20)
+        inrementTime = input("Progress time with: ");
         print("Assistant Started")
 
-        currentMinute = currentMinute + 15
+        currentMinute = currentMinute + inrementTime
 
-        if (currentMinute == 60):
-            currentMinute = 0
+        if (currentMinute > 60):
+            currentMinute = currentMinute - 60
             currentHour = currentHour + 1
-            
+
         print("Time:", currentHour, ":", currentMinute)
 
         for event in listJson:

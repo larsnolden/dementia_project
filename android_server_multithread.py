@@ -45,7 +45,8 @@ def assistant():
         if (currentMinute == 60):
             currentMinute = 0
             currentHour = currentHour + 1
-            print("Time:", currentHour, ":", currentMinute)
+            
+        print("Time:", currentHour, ":", currentMinute)
 
         for event in listJson:
             currentTimeInMinutes = currentHour*60 + currentMinute
